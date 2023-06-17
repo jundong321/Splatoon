@@ -113,21 +113,21 @@ namespace SplatoonScriptsOfficial.Duties.Endwalker
                 int biasX = whitePos.X < 100 ? 5 : -5;
                 Indicator.refX = whitePos.X + biasX;
                 Indicator.refY = whitePos.Y;
-                lastTowerBlack = false; 
+                lastTowerBlack = false;
             }
             else if (statusList.Any(x => x.StatusId == DNABuff))
             {
-                // 1 buff, go first tower
-                Indicator.refX = Svc.ClientState.LocalPlayer.Position.ToVector2().X < 100 ? 85 : 115;
+                // 1 buff, wait
+                Indicator.refX = Svc.ClientState.LocalPlayer.Position.ToVector2().X < 100 ? 90 : 110;
                 Indicator.refY = 91;
-                lastTowerBlack = (Indicator.refX < 100) == (blackPos.X < 100); 
+                lastTowerBlack = (Indicator.refX < 100) != (blackPos.X < 100);
             }
             else
             {
-                // 0 buff, wait;
-                Indicator.refX = Svc.ClientState.LocalPlayer.Position.ToVector2().X < 100 ? 90 : 110;
+                // 0 buff, go first tower
+                Indicator.refX = Svc.ClientState.LocalPlayer.Position.ToVector2().X < 100 ? 85 : 115;
                 Indicator.refY = 91;
-                lastTowerBlack = (Indicator.refX < 100) != (blackPos.X < 100);  
+                lastTowerBlack = (Indicator.refX < 100) == (blackPos.X < 100);
             }
 
             directionRight = (int)Indicator.refX < 100 ? false : true;
